@@ -41,7 +41,7 @@ El ecosistema del proyecto está construido sobre tecnologías eficientes y espe
   </tr>
   <tr>
     <td><b>Manipulación CAD</b></td>
-    <td><a href="https://ezdxf.mozman.at/">ezdxf</a> (Librería avanzada para procesamiento de estructuras DXF)</td>
+    <td><a href="https://ezdxf.mozman.at/" target="_blank">ezdxf</a> (Librería avanzada para procesamiento de estructuras DXF)</td>
   </tr>
   <tr>
     <td><b>Cálculo Matemático</b></td>
