@@ -6,27 +6,48 @@
 </p>
 
 <p align="justify" style="font-family: 'Poppins', sans-serif; font-size: 1.1em;">
-Este proyecto nace con el objetivo de automatizar y optimizar el proceso de corte de metales. Se trata de una herramienta de software capaz de interpretar geometrías complejas desde archivos CAD de formato estándar para calcular distribuciones eficientes (anidados) sobre planchas de chapa, minimizando drásticamente el desperdicio de material.
+Este proyecto busca automatizar parte del proceso de corte de chapa a partir de geometrías contenidas en archivos DXF. Actualmente, la lógica implementada permite leer un dibujo, extraer entidades geométricas, reconstruir contornos y separar el contorno principal de los posibles calados internos.
 </p>
 
 ---
 
-## 🎯 Estado Actual del Desarrollo
+## 🎯 Estado actual del desarrollo
 
-El software se encuentra actualmente en **fase de desarrollo activo**. Al día de hoy, el motor geométrico ya es capaz de:
-* [x] Leer e interpretar entidades nativas de archivos **DXF** (`LINE`, `ARC`).
-* [x] Procesar algoritmos de encadenamiento iterativo mediante lógica de continuidad geométrica.
-* [x] Reconocer de forma independiente múltiples contornos cerrados (distinguiendo entre perímetros exteriores y calados/perforaciones internas).
+El proyecto se encuentra en una fase de desarrollo funcional intermedia. Hasta el momento, las siguientes capacidades están implementadas y verificables en el código:
+
+- [x] Lectura de archivos DXF con la librería ezdxf.
+- [x] Procesamiento de entidades de tipo LINE y ARC.
+- [x] Conversión de entidades en segmentos geométricos simples.
+- [x] Reconstrucción de contornos cerrados a partir de segmentos conectados.
+- [x] Identificación de un contorno principal o macrocontorno.
+- [x] Cálculo de límites por coordenadas con min() y max().
+- [x] Detección de calados internos que quedan dentro del contorno principal.
+- [x] Generación de un resultado estructurado en forma de diccionario con el archivo procesado, límites, contorno macro y calados válidos.
 
 ---
 
-## 🚀 Alcance del Proyecto Final
+## 🔧 Funcionalidades ya incorporadas
 
-Una vez completado el ciclo de desarrollo, la herramienta ofrecerá una solución integral que permitirá:
+El flujo actual del programa realiza lo siguiente:
 
-1. **Clasificación Jerárquica Automática:** Identificación automática del contorno macro (perímetro de la pieza) mediante cálculo de *bounding boxes* (cuadros delimitadores) y asignación de sus calados internos (islas/agujeros).
-2. **Algoritmo de Anidado (Nesting):** Computación geométrica para empaquetar de forma óptima múltiples piezas dentro de las dimensiones de una chapa estándar.
-3. **Exportación Automatizada:** Generación de un nuevo archivo DXF con la distribución optimizada de corte lista para ser introducida en máquinas CNC (Láser/Plasma).
+1. Lee un archivo DXF desde la carpeta files.
+2. Recorre las entidades del dibujo.
+3. Convierte las líneas y arcos en pares de puntos.
+4. Une los segmentos para formar contornos cerrados.
+5. Selecciona el contorno de mayor tamaño como contorno macro.
+6. Compara los demás contornos con los límites del macrocontorno para identificar calados internos.
+7. Devuelve un resultado listo para una siguiente etapa de análisis o nesting.
+
+---
+
+## 🚧 Funcionalidades pendientes
+
+Las siguientes partes aún no están implementadas en el código actual:
+
+- [ ] Algoritmo de nesting para ubicar piezas dentro de una chapa.
+- [ ] Rotación y traslación automática de piezas.
+- [ ] Exportación o generación de un nuevo archivo DXF con la distribución resultante.
+- [ ] Interfaz de usuario o flujo de entrada más flexible.
 
 ---
 
@@ -52,6 +73,6 @@ El ecosistema del proyecto está construido sobre tecnologías eficientes y espe
 ---
 
 ## 🏗️ Próximos Pasos (Roadmap)
-- [ ] Implementar la función de cálculo de áreas y límites (*Bounding Box*) mediante `min()` y `max()`.
-- [ ] Diseñar el algoritmo de colisión (*Point-in-Polygon*) para emparentar agujeros con sus piezas.
+- [x] Implementar la función de cálculo de áreas y límites (*Bounding Box*) mediante `min()` y `max()`.
+- [x] Diseñar el algoritmo de colisión (*Point-in-Polygon*) para emparentar calados con sus piezas.
 - [ ] Desarrollar la lógica de rotación y traslación de piezas para el acomodo en la chapa.
