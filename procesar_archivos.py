@@ -11,14 +11,11 @@ def cargar_todas_las_piezas(carpeta_origen):
     print(f"📋 Se encontraron {len(archivos_dxf)} archivos DXF para procesar.\n")
     
     for archivo in archivos_dxf:
-        print(f"⏳ Procesando: {archivo.name}...")
-        
         # Llamamos a la función modularizada
         datos_pieza = procesar_pieza(archivo)
         
         if datos_pieza:
             lista_de_piezas.append(datos_pieza)
-            print(f"✅ {archivo.name} empaquetado. (Calados: {len(datos_pieza['contornos_calados'])})")
         else:
             print(f"⚠️ Se omitió el archivo {archivo.name} debido a errores.")
             
@@ -33,4 +30,6 @@ if __name__ == "__main__":
     
     print("\n--- RESUMEN DEL PROCESAMIENTO ---")
     print(f"📦 Total de piezas listas para Nesting: {len(todas_las_piezas)}")
+    for pieza in todas_las_piezas:
+        print(f'{pieza}\n')
 
